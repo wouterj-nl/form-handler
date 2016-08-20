@@ -24,6 +24,8 @@ class AppKernel extends Kernel
             new CodeExplorerBundle\CodeExplorerBundle(),
             new AppBundle\AppBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+
+            new Hostnet\Bundle\FormHandlerBundle\FormHandlerBundle(),
         ];
 
         // Some bundles are only used while developing the application or during

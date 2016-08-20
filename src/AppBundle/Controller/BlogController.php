@@ -82,28 +82,24 @@ class BlogController extends Controller
      */
     public function commentNewAction(Request $request, Post $post)
     {
-        $form = $this->createForm(CommentType::class);
+        // get the handler service
+        $handler = $this->get('app.comment_form_handler');
+        $handler->setPost($post);
 
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            /** @var Comment $comment */
-            $comment = $form->getData();
-            $comment->setAuthorEmail($this->getUser()->getEmail());
-            $comment->setPost($post);
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($comment);
-            $entityManager->flush();
-
+        $result = $this->get('form_handler.provider.simple')->handle($request, $handler);
+        if ($result) {
+            // the form handler returns true, which means the form is handled
+            // successfully
             return $this->redirectToRoute('blog_post', ['slug' => $post->getSlug()]);
         }
 
+        // the form is not submitted or not valid, render the page again
         return $this->render('blog/comment_form_error.html.twig', [
             'post' => $post,
-            'form' => $form->createView(),
+            'form' => $handler->getForm()->createView(),
         ]);
     }
+    
 
     /**
      * This controller is called directly via the render() function in the
