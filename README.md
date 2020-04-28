@@ -1,7 +1,7 @@
 # Example for "Trimming your Controllers using Form Handlers"
 
 A real world application example used in
-["Trimming your Controllers using Form Handlers"](http://wouterj.nl/2016/08/trimming-your-controllers-using-form-handlers)
+["Trimming your Controllers using Form Handlers"](https://wouterj.nl/2016/08/form-handlers)
 
 ## Try it out
 
